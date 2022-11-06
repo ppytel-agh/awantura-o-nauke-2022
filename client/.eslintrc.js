@@ -14,7 +14,8 @@ module.exports = {
         singleQuote: true,
         printWidth: 120,
         bracketSpacing: true,
-        trailingComma: 'none'
+        trailingComma: 'none',
+        endOfLine: 'auto'
       }
     ],
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
