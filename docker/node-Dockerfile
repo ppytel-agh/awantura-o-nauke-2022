@@ -1,7 +1,0 @@
-FROM node:18.12
-
-EXPOSE 8000
-
-WORKDIR /home/node
-
-ENTRYPOINT ["bash", "-c"]

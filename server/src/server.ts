@@ -19,10 +19,9 @@ dotenv.config();
 class ClashServer {
   private readonly app: express.Application;
   private readonly server: http.Server;
-  private readonly io: SocketIO.Server;
+  private readonly io: SocketIO.Server;  
   private readonly corsOpts = {
-    origin: [/localhost:[0-9]{4}/, /127\.0\.0\.1:[0-9]{4}/, /\.malski\.pl$/],
-    methods: ['GET', 'POST']
+	methods: ['GET', 'POST']
   };
   private port: number;
   private useDatabase = false;
@@ -94,6 +93,8 @@ if (require.main === module) {
   const server = new ClashServer();
   const port = parseInt(process.env.SERVER_PORT);
   const mongoUri = process.env.MONGODB_URI;
+  
+  Logger.info(`${ process.env.SERVER_REGEX }`);
 
   if (mongoUri) {
     server
