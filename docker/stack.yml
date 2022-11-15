@@ -34,3 +34,10 @@ services:
         volumes:
           - ../client:/home/node
           - /home/node/node_modules
+          
+    aon-client-dist:
+        image: httpd:2.4
+        ports:
+            - 8083:80
+        volumes:
+            - ../client/dist:/usr/local/apache2/htdocs
