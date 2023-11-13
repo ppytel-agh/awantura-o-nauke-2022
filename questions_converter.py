@@ -25,8 +25,8 @@ if __name__ == '__main__':
                 category_question_el.find('Tip4').text,
             ]
             category_question_object = {
-                "content": question_title,
-                "hints": question_answers
+                "hints": question_answers,
+                "content": question_title
             }
             category_questions_array.append(category_question_object)
 
