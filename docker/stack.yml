@@ -6,38 +6,21 @@ services:
     aon-server:
         build:
             context: ../server
-            args:
-                NODE_VERSION: 18.12
-                HTTP_SERVER_PORT: 8000
-            dockerfile: ../docker/nodejs.Dockerfile
-        entrypoint: "npm start"
-        #entrypoint: "tail -f /dev/null"
+            dockerfile: ../docker/server.Dockerfile
         ports:
           - 8001:8000
         volumes:
-          - ../server:/home/node
-          - /home/node/node_modules
+          - ../server:/home/server
+          - /home/server/node_modules
       
     aon-client:
         environment:
-            - VUE_APP_SERVER_ADDRESS=http://192.168.69.103:8001
+            - VUE_APP_SERVER_ADDRESS=http://localhost:8001
         build:
             context: ../client
-            args:
-                NODE_VERSION: 16.18
-                HTTP_SERVER_PORT: 8080
-            dockerfile: ../docker/nodejs.Dockerfile
-        entrypoint: "npm run serve"
-        #entrypoint: "tail -f /dev/null"
+            dockerfile: ../docker/client.Dockerfile
         ports:
           - 8082:8080
         volumes:
-          - ../client:/home/node
-          - /home/node/node_modules
-          
-    aon-client-dist:
-        image: httpd:2.4
-        ports:
-            - 8083:80
-        volumes:
-            - ../client/dist:/usr/local/apache2/htdocs
+          - ../client:/home/client
+          - /home/client/node_modules
