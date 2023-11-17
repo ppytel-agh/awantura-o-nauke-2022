@@ -1,23 +1,27 @@
 version: '3.1'
 
-name: awantura-o-nauke
+name: awantura-o-nauke-dev
 
 services:
-    aon-server:
+    aon-server:         
         build:
             context: ../server
-            dockerfile: ../docker/server.Dockerfile
+            dockerfile: ../docker/server-dev.Dockerfile
         ports:
-            - 8001:8001
+            - 8010:8010
         volumes:
-            - ../logs/prod:/home/server/logs
+            - ../server:/home/server
+            - ../logs/dev:/home/server/logs
+            - /home/server/node_modules
       
     aon-client:
         environment:
-            - VUE_APP_SERVER_ADDRESS=http://192.168.0.10:8001
-            - BASE_URL=http://192.168.0.10
+            - VUE_APP_SERVER_ADDRESS=http://192.168.1.100:8010            
         build:
             context: ../client
-            dockerfile: ../docker/client.Dockerfile
+            dockerfile: ../docker/client-dev.Dockerfile
         ports:
-            - 80:80
+            - 8082:8080
+        volumes:
+            - ../client:/home/client
+            - /home/client/node_modules
