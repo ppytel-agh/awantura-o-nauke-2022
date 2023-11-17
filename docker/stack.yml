@@ -8,19 +8,18 @@ services:
             context: ../server
             dockerfile: ../docker/server.Dockerfile
         ports:
-          - 8001:8000
-        volumes:
-          - ../server:/home/server
-          - /home/server/node_modules
+          - 8001:8001
       
     aon-client:
         environment:
-            - VUE_APP_SERVER_ADDRESS=http://localhost:8001
+            - VUE_APP_SERVER_ADDRESS=http://awantura-o-nauke.local:8001       
         build:
             context: ../client
             dockerfile: ../docker/client.Dockerfile
         ports:
-          - 8082:8080
+          - 80:80
+        hostname: awantura-o-nauke.local
         volumes:
-          - ../client:/home/client
           - /home/client/node_modules
+          - /home/client/build
+          - /home/client/dist

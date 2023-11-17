@@ -1,0 +1,29 @@
+version: '3.1'
+
+name: awantura-o-nauke-dev
+
+services:
+    aon-server:
+        environment:
+            - SERVER_PORT=8010
+        build:
+            context: ../server
+            dockerfile: ../docker/server-dev.Dockerfile
+        ports:
+          - 8010:8010
+        volumes:
+          - ../server:/home/server
+          - ../logs/dev:/home/server/logs
+          - /home/server/node_modules
+      
+    aon-client:
+        environment:
+            - VUE_APP_SERVER_ADDRESS=http://localhost:8010            
+        build:
+            context: ../client
+            dockerfile: ../docker/client-dev.Dockerfile
+        ports:
+          - 8082:8080
+        volumes:
+          - ../client:/home/client
+          - /home/client/node_modules

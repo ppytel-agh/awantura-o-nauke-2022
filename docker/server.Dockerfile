@@ -8,6 +8,11 @@ RUN npm install
 
 COPY . .
 
-EXPOSE 8000
+ENV NODE_ENV=production
+ENV SERVER_PORT=8001
 
-CMD ["npm", "run", "server"]
+RUN npm run build
+
+EXPOSE 8001
+
+CMD ["npm", "start"]
